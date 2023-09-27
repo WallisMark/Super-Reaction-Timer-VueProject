@@ -1,7 +1,7 @@
 <template>
   <h1>Super Reaction App</h1>
-  <button @click = "handleStart">click</button>
-  <BlockComponent/>
+  <button @click = "handleStart" :disabled = "isPlaying">click to start</button>
+  <BlockComponent :delay="delay" v-if = "isPlaying"/>
 </template>
 
 <script>
