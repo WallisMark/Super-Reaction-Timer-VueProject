@@ -1,7 +1,8 @@
 <template>
   <h1>Super Reaction App</h1>
   <button @click = "handleStart" :disabled = "isPlaying">click to start</button>
-  <BlockComponent :delay="delay" v-if = "isPlaying"/>
+  <BlockComponent :delay="delay" v-if = "isPlaying" @end="handleEndGame"/>
+  <p v-if ="showResults">reaction time:{{ score }} ms</p>
 </template>
 
 <script>
@@ -15,7 +16,9 @@ export default {
   data(){
     return{
       isPlaying:false,
-      delay: null
+      delay: null,
+      scole:null,
+      showResults:null
     }
   },
   methods:{
@@ -23,6 +26,12 @@ export default {
       this.isPlaying = true
       this.delay = 2000 + Math.floor(Math.random()*5000)
       console.log(this.delay)
+    },
+    handleEndGame(reactionTime){
+      this.score = reactionTime
+      this.isPlaying = false
+      this.showResults= true
+
     }
   }
 }
